@@ -1,7 +1,7 @@
 # GROUP PROJECT FOR MOBILE APPLICATION DEVELOPMENT
 
 By:
-1) Harraz
+1) Muhammad Harraz Bin Abd Rahim (1922475)
 2) Ahmad
 3) Mohammad Syameer Imran Bin Mohd Ashrof (2015807)
 
