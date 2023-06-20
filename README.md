@@ -1,6 +1,9 @@
-# mad_proj
+# GROUP PROJECT FOR MOBILE APPLICATION DEVELOPMENT
 
-A new Flutter project.
+By:
+1) Harraz
+2) Ahmad
+3) Mohammad Syameer Imran Bin Mohd Ashrof (2015807)
 
 ## Getting Started
 
