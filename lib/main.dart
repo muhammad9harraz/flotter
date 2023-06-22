@@ -48,32 +48,45 @@ class _LoginPageState extends State<LoginPage> {
       // This give the variable path to the users collection in the db
       final userLog = db.collection("users").doc(username);
 
-      // If exist, it will get its content
+      // Getting the document field
       userLog.get().then(
         (DocumentSnapshot doc) {
-          // Map the data to a variable, save it in variable with regrex of removing '()'
-          final data = doc.data() as Map<String, dynamic>;
-          var dataPass = data.values.toString();
-          var newpass = dataPass.replaceAll(RegExp('[^A-Za-z0-9]'), '');
-          developer.log('Password in firestore: $newpass');
-          developer.log('Password entered: $password');
+          // If exist, it will get its content
+          if (doc.exists) {
+            // Map the data to a variable, save it in variable with regrex of removing '()'
+            final data = doc.data() as Map<String, dynamic>;
+            var dataPass = data.values.toString();
+            var newpass = dataPass.replaceAll(RegExp('[^A-Za-z0-9]'), '');
+            developer.log('Password in firestore: $newpass');
+            developer.log('Password entered: $password');
 
-          // Comparing the input password with the stored password of the user
-          if (password == newpass) {
-            //If success, show a toast...
-            developer.log('User successfully logged!');
-            Fluttertoast.showToast(
-                msg: "Successfully Logged In!",
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.BOTTOM,
-                timeInSecForIosWeb: 1,
-                backgroundColor: const Color.fromARGB(255, 230, 242, 255),
-                textColor: Colors.black,
-                fontSize: 16.0);
+            // Comparing the input password with the stored password of the user
+            if (password == newpass) {
+              //If success, show a toast...
+              developer.log('User successfully logged!');
+              Fluttertoast.showToast(
+                  msg: "Successfully Logged In!",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: const Color.fromARGB(255, 230, 242, 255),
+                  textColor: Colors.black,
+                  fontSize: 16.0);
 
-            // and route to the next page (movies.dart)
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const MyApp()));
+              // and route to the next page (movies.dart)
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const MyApp()));
+            } else {
+              // Else, go here. Self-explanatory
+              Fluttertoast.showToast(
+                  msg: "Wrong Username or Password!",
+                  toastLength: Toast.LENGTH_LONG,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: const Color.fromARGB(255, 230, 242, 255),
+                  textColor: Colors.black,
+                  fontSize: 16.0);
+            }
           } else {
             // Else, go here. Self-explanatory
             Fluttertoast.showToast(
