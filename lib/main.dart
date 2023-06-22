@@ -8,6 +8,7 @@ import 'firebase_options.dart';
 import 'dart:developer' as developer;
 
 void main() async {
+  //Initializing Firebase Database and the app
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -36,22 +37,30 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  // Variables to use with the login function
   final TextEditingController _username = TextEditingController();
   final TextEditingController _password = TextEditingController();
   final db = FirebaseFirestore.instance;
-  late Map<String, dynamic> userInfo;
 
+  // Async function to login using Firebase's Firestore db
   Future<void> loginAsync(String username, String password) async {
     try {
+      // This give the variable path to the users collection in the db
       final userLog = db.collection("users").doc(username);
+
+      // If exist, it will get its content
       userLog.get().then(
         (DocumentSnapshot doc) {
+          // Map the data to a variable, save it in variable with regrex of removing '()'
           final data = doc.data() as Map<String, dynamic>;
           var dataPass = data.values.toString();
           var newpass = dataPass.replaceAll(RegExp('[^A-Za-z0-9]'), '');
           developer.log('Password in firestore: $newpass');
           developer.log('Password entered: $password');
+
+          // Comparing the input password with the stored password of the user
           if (password == newpass) {
+            //If success, show a toast...
             developer.log('User successfully logged!');
             Fluttertoast.showToast(
                 msg: "Successfully Logged In!",
@@ -61,9 +70,12 @@ class _LoginPageState extends State<LoginPage> {
                 backgroundColor: const Color.fromARGB(255, 230, 242, 255),
                 textColor: Colors.black,
                 fontSize: 16.0);
+
+            // and route to the next page (movies.dart)
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const MyApp()));
           } else {
+            // Else, go here. Self-explanatory
             Fluttertoast.showToast(
                 msg: "Wrong Username or Password!",
                 toastLength: Toast.LENGTH_LONG,
