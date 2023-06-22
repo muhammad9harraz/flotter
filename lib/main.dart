@@ -109,71 +109,80 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.blueGrey,
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text('Login Page'),
+        body: Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/images/bg.jpg"),
+          fit: BoxFit.cover,
         ),
-        body: Center(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-              const Padding(
-                padding:
-                    EdgeInsets.only(left: 20, bottom: 120, right: 20, top: 0),
-                child: Text(
-                  "MOVIE SEARCH APP",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
+      ),
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Padding(
+              padding:
+                  EdgeInsets.only(left: 20, bottom: 120, right: 20, top: 0),
+              child: Text(
+                "MOVIE SEARCH APP",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 0),
-                child: TextField(
-                  controller: _username,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0)),
-                      hintText: 'Username'),
-                ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 0),
+              child: TextField(
+                controller: _username,
+                decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                        borderSide:
+                            const BorderSide(width: 3, color: Colors.white),
+                        borderRadius: BorderRadius.circular(10.0)),
+                    hintText: 'Username'),
+                style: const TextStyle(color: Colors.white),
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-                child: TextField(
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
+              child: TextField(
                   obscureText: true,
                   controller: _password,
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(
+                      enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              const BorderSide(width: 3, color: Colors.white),
                           borderRadius: BorderRadius.circular(10.0)),
                       hintText: 'Password'),
-                ),
-              ),
-              ElevatedButton(
-                  onPressed: () {
-                    final user = _username.text;
-                    final pass = _password.text;
+                  style: const TextStyle(color: Colors.white)),
+            ),
+            SizedBox(
+                height: 60, //height of button
+                width: 150,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(elevation: 3),
+                    onPressed: () {
+                      final user = _username.text;
+                      final pass = _password.text;
 
-                    if (user.isEmpty || pass.isEmpty) {
-                      Fluttertoast.showToast(
-                          msg: "Username and Password cannot be empty!",
-                          toastLength: Toast.LENGTH_LONG,
-                          gravity: ToastGravity.BOTTOM,
-                          timeInSecForIosWeb: 1,
-                          backgroundColor:
-                              const Color.fromARGB(255, 230, 242, 255),
-                          textColor: Colors.black,
-                          fontSize: 16.0);
-                    } else {
-                      loginAsync(user, pass);
-                    }
-                  },
-                  child: const Text('PROCEED'))
-            ])));
+                      if (user.isEmpty || pass.isEmpty) {
+                        Fluttertoast.showToast(
+                            msg: "Username and Password cannot be empty!",
+                            toastLength: Toast.LENGTH_LONG,
+                            gravity: ToastGravity.BOTTOM,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor:
+                                const Color.fromARGB(255, 230, 242, 255),
+                            textColor: Colors.black,
+                            fontSize: 16.0);
+                      } else {
+                        loginAsync(user, pass);
+                      }
+                    },
+                    child: const Text('PROCEED')))
+          ]),
+    ));
   }
 }
