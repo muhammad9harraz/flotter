@@ -2,18 +2,21 @@
 
 By:
 1) Muhammad Harraz Bin Abd Rahim (1922475)
-2) Ahmad
+2) Ahmad Usayd (1926573)
 3) Mohammad Syameer Imran Bin Mohd Ashrof (2015807)
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project contains widgets, use of HTTP, firebase, as well as the use of API calls. Generally, this project consists of a movie search function. This app allows users to search for any movies and displays the details of the searched movie, displaysing the title, poster image, and date released of the movie. Before doing so, the user should log in to the app. (Only registered users will be allowed to log in).
 
-A few resources to get you started if this is your first Flutter project:
+## How this project works
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Widgets - These are used for the layout of the application.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+HTTP library - Fetch movie data online.
+
+Firebase - Authenticates registered users
+
+## API used
+
+https://developer.themoviedb.org/reference/intro/getting-started
